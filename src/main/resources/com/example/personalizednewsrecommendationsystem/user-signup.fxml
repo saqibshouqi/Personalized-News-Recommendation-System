@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.personalizednewsrecommendationsystem.UserSignup">
+   <children>
+      <Label layoutX="254.0" layoutY="34.0" text="User SignUp">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="123.0" layoutY="113.0" text="Username">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="125.0" layoutY="158.0" text="Password">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="username" layoutX="241.0" layoutY="110.0" prefHeight="26.0" prefWidth="234.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="password" layoutX="241.0" layoutY="155.0" prefHeight="26.0" prefWidth="234.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Button fx:id="confirm" layoutX="266.0" layoutY="305.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" text="Confirm">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="124.0" layoutY="204.0" text="Confirm Password">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="confirmPassword" layoutX="241.0" layoutY="199.0" prefHeight="26.0" prefWidth="234.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
