@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.personalizednewsrecommendationsystem.RecommendedNews"
+            prefHeight="600.0" prefWidth="800.0">
+<children>
+    <ListView fx:id="recommendedListView" layoutX="20.0" layoutY="20.0" prefHeight="500.0" prefWidth="750.0"/>
+    <Button layoutX="350.0" layoutY="540.0" text="View Details" onAction="#onViewDetailsClick"/>
+</children>
+</AnchorPane>

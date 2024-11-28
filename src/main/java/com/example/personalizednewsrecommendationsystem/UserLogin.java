@@ -18,6 +18,8 @@ public class UserLogin {
     @FXML
     private Button login, signUp;
 
+
+
     @FXML
     protected void onLoginButtonClick(ActionEvent actionEvent) {
         String user = username.getText().trim();
@@ -36,6 +38,9 @@ public class UserLogin {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                // Store the username in the session
+                SessionManager.setCurrentUsername(user);
+
                 showAlert("Success", "Login Successful!", Alert.AlertType.INFORMATION);
                 NavigationHelper.loadScene("user-dashboard.fxml", "User Dashboard");
             } else {

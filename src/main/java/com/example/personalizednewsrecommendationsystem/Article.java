@@ -1,14 +1,20 @@
 package com.example.personalizednewsrecommendationsystem;
 
 public class Article {
+    private int id;
     private String title;
     private String content;
     private String category;
 
-    public Article(String title, String content, String category) {
+    public Article(int id, String title, String content, String category) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.category = category;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -27,4 +33,5 @@ public class Article {
     public String toString() {
         return "Title: " + title + ", Category: " + category;
     }
+
 }
