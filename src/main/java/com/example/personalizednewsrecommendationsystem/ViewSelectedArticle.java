@@ -159,12 +159,29 @@ public class ViewSelectedArticle {
 
     private void updateCategoryPoints(int delta) {
         try (Connection connection = DatabaseConnection.connect()) {
-            String query = "UPDATE UserPoints SET Points = Points + ? WHERE UserName = ? AND Category = ?";
-            PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setInt(1, delta);
-            stmt.setString(2, currentUsername);
-            stmt.setString(3, currentArticle.getCategory());
-            stmt.executeUpdate();
+            // First, check if a record exists for the current user and category
+            String checkQuery = "SELECT * FROM UserPoints WHERE UserName = ? AND Category = ?";
+            PreparedStatement checkStmt = connection.prepareStatement(checkQuery);
+            checkStmt.setString(1, currentUsername);
+            checkStmt.setString(2, currentArticle.getCategory());
+            var resultSet = checkStmt.executeQuery();
+
+            if (!resultSet.next()) {
+                // Insert a new record if none exists
+                String insertQuery = "INSERT INTO UserPoints (UserName, Category, Points) VALUES (?, ?, 0)";
+                PreparedStatement insertStmt = connection.prepareStatement(insertQuery);
+                insertStmt.setString(1, currentUsername);
+                insertStmt.setString(2, currentArticle.getCategory());
+                insertStmt.executeUpdate();
+            }
+
+            // Now update the points
+            String updateQuery = "UPDATE UserPoints SET Points = Points + ? WHERE UserName = ? AND Category = ?";
+            PreparedStatement updateStmt = connection.prepareStatement(updateQuery);
+            updateStmt.setInt(1, delta);
+            updateStmt.setString(2, currentUsername);
+            updateStmt.setString(3, currentArticle.getCategory());
+            updateStmt.executeUpdate();
 
             String action = delta > 0 ? "liked" : "disliked";
             showAlert("Success", "You have " + action + " the article.", Alert.AlertType.INFORMATION);
@@ -172,6 +189,7 @@ public class ViewSelectedArticle {
             showAlert("Error", "Failed to update points: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
 
     private void showAlert(String title, String content, Alert.AlertType type) {
         Alert alert = new Alert(type);
