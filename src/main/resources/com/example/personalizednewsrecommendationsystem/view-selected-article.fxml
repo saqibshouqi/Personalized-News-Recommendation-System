@@ -8,16 +8,12 @@
 
 
 
-
-
-
-
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.personalizednewsrecommendationsystem.ViewSelectedArticle"
             prefHeight="400.0" prefWidth="600.0">
 <children>
-    <Label fx:id="articleTitleLabel" layoutX="20.0" layoutY="20.0" />
-    <Label fx:id="categoryLabel" layoutX="20.0" layoutY="50.0" />
+    <Label fx:id="articleTitleLabel" layoutX="20.0" layoutY="20.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+    <Label fx:id="categoryLabel" layoutX="20.0" layoutY="50.0" style="-fx-font-size: 14px;" />
     <TextArea fx:id="contentArea" layoutX="20.0" layoutY="80.0" prefHeight="200.0" prefWidth="560.0" editable="false" />
     <Button fx:id="likeButton" layoutX="100.0" layoutY="300.0" text="Like" onAction="#onLikeClick" />
     <Button fx:id="dislikeButton" layoutX="200.0" layoutY="300.0" text="Dislike" onAction="#onDislikeClick" />
