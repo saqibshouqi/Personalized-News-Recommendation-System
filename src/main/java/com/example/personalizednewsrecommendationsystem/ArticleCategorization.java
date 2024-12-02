@@ -62,7 +62,6 @@ public class ArticleCategorization {
         List<String> processedLines = new ArrayList<>();
         String line;
         while ((line = reader.readLine()) != null) {
-            // Replace the first comma with a tab to separate category and text properly
             int firstCommaIndex = line.indexOf(",");
             if (firstCommaIndex != -1) {
                 String processedLine = line.substring(0, firstCommaIndex) + "\t" + line.substring(firstCommaIndex + 1);
@@ -71,24 +70,39 @@ public class ArticleCategorization {
         }
         reader.close();
 
-        // Create an ObjectStream from the processed lines
         ObjectStream<String> lineStream = new PlainTextByLineStream(() -> new ByteArrayInputStream(String.join("\n", processedLines).getBytes()), "UTF-8");
         ObjectStream<DocumentSample> sampleStream = new DocumentSampleStream(lineStream);
 
         TrainingParameters params = new TrainingParameters();
-        params.put(TrainingParameters.ITERATIONS_PARAM, String.valueOf(100));
-        params.put(TrainingParameters.CUTOFF_PARAM, String.valueOf(1));
+        params.put(TrainingParameters.ITERATIONS_PARAM, "100");
+        params.put(TrainingParameters.CUTOFF_PARAM, "1");
 
-        return DocumentCategorizerME.train("en", sampleStream, params, new DoccatFactory());
+        DoccatModel model = DocumentCategorizerME.train("en", sampleStream, params, new DoccatFactory());
+
+        // Save the model
+        try (OutputStream modelOut = new FileOutputStream("src/main/resources/com/example/personalizednewsrecommendationsystem/news-category-model.bin")) {
+            model.serialize(modelOut);
+        }
+
+        return model;
     }
 
 
 
-    private static String predictCategory(DoccatModel model, String title) {
+
+    static String predictCategory(DoccatModel model, String title) {
         DocumentCategorizerME categorizer = new DocumentCategorizerME(model);
         double[] outcomes = categorizer.categorize(title);
         return categorizer.getBestCategory(outcomes);
     }
+
+
+    public static DoccatModel loadTrainedModel() throws IOException {
+        try (InputStream modelIn = new FileInputStream("src/main/resources/com/example/personalizednewsrecommendationsystem/news-category-model.bin")) {
+            return new DoccatModel(modelIn);
+        }
+    }
+
 
 
 }

@@ -7,9 +7,6 @@
 <?import javafx.scene.layout.*?>
 
 
-
-
-
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.personalizednewsrecommendationsystem.ManageProfile"
@@ -18,18 +15,15 @@
     <Label layoutX="20" layoutY="20" text="Username:" />
     <TextField fx:id="usernameField" layoutX="100" layoutY="20" editable="false" />
 
-    <Label layoutX="20" layoutY="60" text="New Password:" />
-    <PasswordField fx:id="newPasswordField" layoutX="100" layoutY="60" />
+    <Label layoutX="20" layoutY="60" text="Email:" />
+    <TextField fx:id="emailField" layoutX="100" layoutY="60" editable="false" />
 
-    <Label layoutX="20" layoutY="100" text="Confirm Password:" />
-    <PasswordField fx:id="confirmPasswordField" layoutX="100" layoutY="100" />
-
-    <Button layoutX="100" layoutY="140" text="Update Password" onAction="#onUpdatePasswordClick" />
+    <Button layoutX="100" layoutY="100" text="Update Password" onAction="#onUpdatePasswordClick" />
 
     <Label layoutX="20" layoutY="180" text="Saved Articles:" />
     <ListView fx:id="savedArticlesList" layoutX="100" layoutY="180" prefWidth="400" prefHeight="200" />
 
-    <Button layoutX="350" layoutY="140" text="View Selected Article" onAction="#onViewArticleClick" />
-
+    <Button layoutX="350" layoutY="100" text="View Selected Article" onAction="#onViewArticleClick" />
 </children>
 </AnchorPane>
+

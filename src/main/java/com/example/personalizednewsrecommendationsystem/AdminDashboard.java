@@ -33,6 +33,11 @@ public class AdminDashboard {
     @FXML
     private TableColumn<User, String> colUsername;
 
+    @FXML
+    private TableColumn<User, String> colEmail;
+
+
+
     private ObservableList<Article> articlesList = FXCollections.observableArrayList();
     private ObservableList<User> usersList = FXCollections.observableArrayList();
 
@@ -44,6 +49,8 @@ public class AdminDashboard {
         colContent.setCellValueFactory(new PropertyValueFactory<>("content"));
 
         colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+
 
         loadArticles();
         loadUsers();
@@ -63,19 +70,21 @@ public class AdminDashboard {
         }
     }
 
+
     private void loadUsers() {
         usersList.clear();
         try (Connection connection = DatabaseConnection.connect()) {
-            String query = "SELECT * FROM UserCredentials";
+            String query = "SELECT UserName, userEmail FROM UserCredentials"; // Include userEmail
             ResultSet rs = connection.createStatement().executeQuery(query);
             while (rs.next()) {
-                usersList.add(new User(rs.getString("UserName"), ""));
+                usersList.add(new User(rs.getString("UserName"), "", rs.getString("userEmail"))); // Pass email
             }
             usersTable.setItems(usersList);
         } catch (Exception e) {
             showAlert("Error", "Failed to load users: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
 
     @FXML
     private void onAddArticleClick(ActionEvent event) {
@@ -108,26 +117,43 @@ public class AdminDashboard {
     }
 
 
-
-
     @FXML
     private void onDeleteArticleClick(ActionEvent event) {
         Article selectedArticle = newsTable.getSelectionModel().getSelectedItem();
         if (selectedArticle != null) {
-            try (Connection connection = DatabaseConnection.connect()) {
-                String query = "DELETE FROM NewsArticles WHERE id = ?";
-                PreparedStatement stmt = connection.prepareStatement(query);
-                stmt.setInt(1, selectedArticle.getId());
-                stmt.executeUpdate();
-                showAlert("Success", "Article deleted successfully!", Alert.AlertType.INFORMATION);
-                loadArticles();
-            } catch (Exception e) {
-                showAlert("Error", "Failed to delete article: " + e.getMessage(), Alert.AlertType.ERROR);
-            }
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Delete Confirmation");
+            confirmationAlert.setHeaderText("Are you sure you want to delete this article?");
+            confirmationAlert.setContentText("Title: " + selectedArticle.getTitle());
+
+            // Wait for user response
+            confirmationAlert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    try (Connection connection = DatabaseConnection.connect()) {
+                        String query = "DELETE FROM NewsArticles WHERE id = ?";
+                        PreparedStatement stmt = connection.prepareStatement(query);
+                        stmt.setInt(1, selectedArticle.getId());
+                        stmt.executeUpdate();
+                        showAlert("Success", "Article deleted successfully!", Alert.AlertType.INFORMATION);
+                        loadArticles();
+                    } catch (Exception e) {
+                        showAlert("Error", "Failed to delete article: " + e.getMessage(), Alert.AlertType.ERROR);
+                    }
+                }
+            });
         } else {
             showAlert("Error", "Please select an article to delete!", Alert.AlertType.ERROR);
         }
     }
+
+
+
+
+
+
+
+
+
 
     @FXML
     private void onAddUserClick(ActionEvent event) {
@@ -155,8 +181,13 @@ public class AdminDashboard {
 
     @FXML
     private void onLogoutClick(ActionEvent event) {
-        NavigationHelper.loadScene("role-selector.fxml", "Login");
+        // Get the current stage from the logout button
+        Stage currentStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+
+        // Call the modified NavigationHelper method to open the login window and close the current dashboard
+        NavigationHelper.loadScene("role-selector.fxml", "Login", currentStage);
     }
+
 
     private void showAlert(String title, String content, Alert.AlertType type) {
         Alert alert = new Alert(type);
@@ -164,4 +195,12 @@ public class AdminDashboard {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+    @FXML
+    private void onRefreshClick(ActionEvent event) {
+        loadArticles();
+        loadUsers();
+        showAlert("Info", "Dashboard refreshed successfully!", Alert.AlertType.INFORMATION);
+    }
+
 }

@@ -29,6 +29,19 @@
             <Font size="14.0" />
          </font>
       </TextField>
+
+      <Label layoutX="125.0" layoutY="248.0" text="Email">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="email" layoutX="241.0" layoutY="245.0" prefHeight="26.0" prefWidth="234.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+
+
       <TextField fx:id="password" layoutX="241.0" layoutY="155.0" prefHeight="26.0" prefWidth="234.0">
          <font>
             <Font size="14.0" />

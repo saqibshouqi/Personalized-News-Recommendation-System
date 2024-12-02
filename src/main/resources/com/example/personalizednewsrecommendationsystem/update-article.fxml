@@ -15,7 +15,7 @@
             prefHeight="400.0" prefWidth="600.0">
 
 <VBox spacing="10" layoutX="100" layoutY="50">
-    <TextField fx:id="categoryField" promptText="Category" />
+    <ChoiceBox fx:id="categoryChoiceBox" />
     <TextField fx:id="titleField" promptText="Title" />
     <TextArea fx:id="contentField" promptText="Content" prefHeight="200" />
     <Button text="Update" onAction="#onUpdateClick" />

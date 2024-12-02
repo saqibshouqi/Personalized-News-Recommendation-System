@@ -3,6 +3,7 @@ package com.example.personalizednewsrecommendationsystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class UserDashboard {
 
@@ -16,10 +17,13 @@ public class UserDashboard {
 
     @FXML
     private void onLogoutButtonClick(ActionEvent actionEvent) {
-        // Handle logout logic, e.g., close session, redirect to login.
-        // Clear session and redirect to login
-        NavigationHelper.loadScene("user-login.fxml", "Login");
+        // Get the current stage from the logout button
+        Stage currentStage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+
+        // Call NavigationHelper to load the login window and close the current dashboard
+        NavigationHelper.loadScene("user-login.fxml", "Login", currentStage);
     }
+
 
     @FXML
     private void onViewAllNewsButtonClick(ActionEvent actionEvent) {

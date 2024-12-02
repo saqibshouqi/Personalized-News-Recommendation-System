@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,6 @@ public class UserLogin {
 
     @FXML
     private Button login, signUp;
-
 
 
     @FXML
@@ -38,11 +38,13 @@ public class UserLogin {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                // Store the username in the session
                 SessionManager.setCurrentUsername(user);
 
                 showAlert("Success", "Login Successful!", Alert.AlertType.INFORMATION);
-                NavigationHelper.loadScene("user-dashboard.fxml", "User Dashboard");
+
+                // Get current stage and pass it to NavigationHelper
+                Stage currentStage = (Stage) username.getScene().getWindow();
+                NavigationHelper.loadScene("user-dashboard.fxml", "User Dashboard", currentStage);
             } else {
                 showAlert("Error", "Invalid Username or Password", Alert.AlertType.ERROR);
             }
@@ -51,10 +53,14 @@ public class UserLogin {
         }
     }
 
+
     @FXML
     protected void onSignUpButtonClick(ActionEvent actionEvent) {
-        NavigationHelper.loadScene("user-signup.fxml", "User Sign Up");
+        // Get current stage and pass it to NavigationHelper
+        Stage currentStage = (Stage) signUp.getScene().getWindow();
+        NavigationHelper.loadScene("user-signup.fxml", "User Sign Up", currentStage);
     }
+
 
     private void showAlert(String title, String content, Alert.AlertType type) {
         Alert alert = new Alert(type);

@@ -24,4 +24,23 @@ public class NavigationHelper {
             System.out.println("Error loading scene: " + e.getMessage());
         }
     }
+
+    public static void loadScene(String fxmlFile, String title, Stage currentStage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(NavigationHelper.class.getResource(fxmlFile));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(scene);
+            stage.show();
+
+            // Close the current stage if provided
+            if (currentStage != null) {
+                currentStage.close();
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading scene: " + e.getMessage());
+        }
+    }
+
 }

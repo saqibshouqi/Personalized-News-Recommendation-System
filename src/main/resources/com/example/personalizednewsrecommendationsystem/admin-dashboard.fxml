@@ -11,6 +11,11 @@
       <Label text="Admin Dashboard" style="-fx-font-size: 24px;"/>
 
       <HBox spacing="10">
+         <Button text="Refresh" onAction="#onRefreshClick"/>
+      </HBox>
+
+
+      <HBox spacing="10">
          <Label text="News Articles" style="-fx-font-size: 18px;"/>
          <Button text="Add Article" onAction="#onAddArticleClick"/>
          <Button text="Update Article" onAction="#onUpdateArticleClick"/>
@@ -35,6 +40,7 @@
       <TableView fx:id="usersTable" prefHeight="200">
          <columns>
             <TableColumn text="Username" fx:id="colUsername" prefWidth="200"/>
+            <TableColumn text="Email" fx:id="colEmail" prefWidth="300"/>
          </columns>
       </TableView>
 
