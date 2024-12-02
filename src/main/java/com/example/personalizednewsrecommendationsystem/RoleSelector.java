@@ -25,22 +25,26 @@ public class RoleSelector {
 
     @FXML
     protected void onUserButtonClick(ActionEvent actionEvent) throws IOException{
-        loadScene("user-login.fxml", "User Login");
+        loadScene("user-login.fxml", "User Login", actionEvent);
     }
 
 
     @FXML
     protected void onSystemAdministratorButtonClick(ActionEvent actionEvent) throws IOException {
-        loadScene("admin-login.fxml", "System Administrator Login");
+        loadScene("admin-login.fxml", "System Administrator Login", actionEvent);
     }
 
-    private void loadScene(String fxmlFile, String title) throws IOException {
+    private void loadScene(String fxmlFile, String title,  ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
+
+        // Close the current stage
+        Stage currentStage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
     }
 
 

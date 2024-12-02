@@ -12,6 +12,8 @@ module com.example.personalizednewsrecommendationsystem {
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires java.desktop;
+    requires com.opencsv;
+    requires opennlp.tools;
 
     opens com.example.personalizednewsrecommendationsystem to javafx.fxml;
     exports com.example.personalizednewsrecommendationsystem;
