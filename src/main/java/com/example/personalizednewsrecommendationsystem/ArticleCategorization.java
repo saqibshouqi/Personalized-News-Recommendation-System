@@ -3,6 +3,10 @@ package com.example.personalizednewsrecommendationsystem;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 import opennlp.tools.doccat.*;
 import opennlp.tools.util.ObjectStream;
 import opennlp.tools.util.PlainTextByLineStream;
@@ -19,14 +23,31 @@ public class ArticleCategorization {
         // Step 2: Train the classifier
         DoccatModel model = trainClassifier();
 
+        // Use ExecutorService for concurrency
+        ExecutorService executor = Executors.newFixedThreadPool(4); // 4 concurrent threads
+
         // Step 3: Predict categories and update dataset
-        List<String[]> updatedArticles = new ArrayList<>();
+        List<Future<String[]>> futures = new ArrayList<>();
         for (String[] article : articles) {
-            String title = article[0];
-            String content = article[1];
-            String category = predictCategory(model, title);
-            updatedArticles.add(new String[]{category, title, content});
+            futures.add(executor.submit(() -> {
+                String title = article[0];
+                String content = article[1];
+                String category = predictCategory(model, title);
+                return new String[]{category, title, content};
+                    }));
         }
+
+        // Collect results
+        List<String[]> updatedArticles = new ArrayList<>();
+        for (Future<String[]> future : futures) {
+            try {
+                updatedArticles.add(future.get()); // Get the result of each task
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        executor.shutdown();
 
         // Step 4: Save the updated dataset
         saveCSV(outputPath, updatedArticles);
@@ -106,6 +127,5 @@ public class ArticleCategorization {
 
 
 }
-
 
 
