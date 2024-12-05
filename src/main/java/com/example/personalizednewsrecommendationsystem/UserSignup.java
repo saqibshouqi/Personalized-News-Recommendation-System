@@ -72,7 +72,7 @@ public class UserSignup {
         }
     }
 
-    private boolean isValidEmail(String email) {
+    boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
         return email.matches(emailRegex);
     }

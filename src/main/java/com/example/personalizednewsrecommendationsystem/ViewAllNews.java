@@ -36,7 +36,7 @@ public class ViewAllNews {
         loadNews();
     }
 
-    private void loadNews() {
+    void loadNews() {
         Main.getExecutorService().execute(() -> {
             List<Article> articles = new ArrayList<>();
             try (Connection connection = DatabaseConnection.connect()) {

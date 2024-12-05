@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.personalizednewsrecommendationsystem.RoleSelector">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.personalizednewsrecommendationsystem.RoleSelector">
    <children>
-      <Label layoutX="110.0" layoutY="21.0" text="Personalized News Recommendation System">
+      <Label layoutX="110.0" layoutY="11.0" text="Personalized News Recommendation System">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

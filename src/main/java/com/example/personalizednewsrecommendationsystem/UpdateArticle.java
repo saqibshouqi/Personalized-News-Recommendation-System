@@ -41,10 +41,6 @@ public class UpdateArticle {
         contentField.setText(article.getContent());
     }
 
-
-
-
-
     @FXML
     private void onUpdateClick(ActionEvent event) {
         String category = categoryChoiceBox.getValue().trim();

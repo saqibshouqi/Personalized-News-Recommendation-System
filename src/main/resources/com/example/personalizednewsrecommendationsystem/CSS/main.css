@@ -1,0 +1,9 @@
+#background {
+    -fx-border-style : solid;
+    -fx-background-image: url("../Image/background-image.jpg");
+    -fx-border-width: 1.5px;
+    -fx-background-position: center center;
+    -fx-background-repeat : no-repeat;
+    -fx-background-size: cover;
+    -fx-background-attachment : fixed;
+}

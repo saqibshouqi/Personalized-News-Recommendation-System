@@ -76,7 +76,7 @@ public class ArticleCategorization {
 
 
 
-    private static DoccatModel trainClassifier() throws IOException {
+    static DoccatModel trainClassifier() throws IOException {
         InputStream dataIn = new FileInputStream("src/main/resources/com/example/personalizednewsrecommendationsystem/News Article Training Dataset.csv");
         BufferedReader reader = new BufferedReader(new InputStreamReader(dataIn));
 

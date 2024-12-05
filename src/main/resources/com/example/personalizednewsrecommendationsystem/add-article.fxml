@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.personalizednewsrecommendationsystem.AddArticle"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane id="background" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.personalizednewsrecommendationsystem.AddArticle">
 
-<VBox spacing="10" layoutX="100" layoutY="50">
+<VBox layoutX="100" layoutY="50" spacing="10">
     <TextField fx:id="titleField" promptText="Title" />
-    <TextArea fx:id="contentField" promptText="Content" prefHeight="200" />
-    <Button text="Submit" onAction="#onSubmitClick" />
+    <TextArea fx:id="contentField" prefHeight="200" promptText="Content" />
+    <Button onAction="#onSubmitClick" text="Submit" />
 </VBox>
 </AnchorPane>
-

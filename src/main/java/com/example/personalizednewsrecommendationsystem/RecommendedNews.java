@@ -160,7 +160,7 @@ public class RecommendedNews {
         loadRecommendedNews();
     }
 
-    private void loadRecommendedNews() {
+    void loadRecommendedNews() {
         executor.execute(() -> {
             Map<String, Integer> categoryPoints = new HashMap<>();
 

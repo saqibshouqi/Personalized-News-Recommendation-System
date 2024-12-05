@@ -18,33 +18,6 @@ public class AddArticle {
     @FXML
     private TextArea contentField;
 
-//    @FXML
-//    private void onSubmitClick(ActionEvent event) {
-//        String category = categoryField.getText().trim();
-//        String title = titleField.getText().trim();
-//        String content = contentField.getText().trim();
-//
-//        if (category.isEmpty() || title.isEmpty() || content.isEmpty()) {
-//            showAlert("Error", "All fields must be filled!", Alert.AlertType.ERROR);
-//            return;
-//        }
-//
-//        try (Connection connection = DatabaseConnection.connect()) {
-//            String query = "INSERT INTO NewsArticles (category, title, content) VALUES (?, ?, ?)";
-//            PreparedStatement stmt = connection.prepareStatement(query);
-//            stmt.setString(1, category);
-//            stmt.setString(2, title);
-//            stmt.setString(3, content);
-//
-//            stmt.executeUpdate();
-//            showAlert("Success", "Article added successfully!", Alert.AlertType.INFORMATION);
-//            // Close the current window
-//            categoryField.getScene().getWindow().hide();
-//        } catch (Exception e) {
-//            showAlert("Error", "Failed to add article: " + e.getMessage(), Alert.AlertType.ERROR);
-//        }
-//    }
-
 
     @FXML
     private void onSubmitClick(ActionEvent event) {
